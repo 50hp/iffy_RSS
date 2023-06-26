@@ -37,30 +37,27 @@ const parser = new Parser();
 // }
 //
 
-function sourceFetch(user) {
+function sourceFetch() {
     console.log('sourceFetch');    
    
     let dbRows = [];
-    let queryText =`SELECT * FROM rss_sources WHERE user_id=$1`;
+    let queryText =`SELECT * FROM rss_sources`;
 
-    pool.query(queryText, [user])
+    pool.query(queryText)
     .then(results => {
         dbRows.push(...results.rows);
         console.log(dbRows);
             (async () => {
                 
                 for ( row of dbRows ) {
-                        let feed = await parser.parseURL(row.source_url);
-                            
-                        console.log(feed, row.id);
-
-                         let queryStuff = `UPDATE rss_sources SET output = $1 WHERE id=$2`;
-                             pool.query(queryStuff, [feed, row.id])
-                             .then(results => {
-                                 console.log('success',results); 
-                             }).catch(error => {
-                                 console.log('errror with query', queryStuff, error);
-                             });
+                    let feed = await parser.parseURL(row.source_url);
+                    let queryStuff = `UPDATE rss_sources SET output = $1 WHERE id=$2`;
+                        pool.query(queryStuff, [feed, row.id])
+                        .then(results => {
+                            console.log('success',results); 
+                        }).catch(error => {
+                            console.log('errror with query', queryStuff, error);
+                        });
                 }
 
                 console.log('end');
