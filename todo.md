@@ -6,8 +6,8 @@
 - [x] rss parser integration
 
 - [ ] user home view
-    - [ ] server get route
-    - [ ] get saga/reducer
+    - [x] server get route
+    - [x] get saga/reducer
     - [ ] put route for save
     - [ ] save toggle button
     - [ ] put route for mark read
