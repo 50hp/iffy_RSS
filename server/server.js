@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const asdfasdf = require('./modules/rss.js');
 require('dotenv').config();
 
 const app = express();
@@ -26,6 +27,7 @@ app.use('/api/user', userRouter);
 
 // Serve static files
 app.use(express.static('build'));
+
 
 // App Set //
 const PORT = process.env.PORT || 5000;
