@@ -1,12 +1,10 @@
-const feedReducer = (state = [], action) => {
+const feed = (state = [], action) => {
     switch (action.type) {
         case 'SET_FEED':
-            return action.payload;
+            return [...state, action.payload];
         default:
             return state;
-  }
+    }
 }; 
- 
 
-
-export default feedReducer;
+export default feed;

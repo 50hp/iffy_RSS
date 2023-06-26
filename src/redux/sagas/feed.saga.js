@@ -2,13 +2,15 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 
-function* fetchFeed(action) {
+function* fetchFeed() {
+    console.log('in fetchFeed');
     try{
-        let results = axios.get(`/${action.payload}`);        
-        yield put({type:"SET_FEED", action:results});
+        const results = yield axios.get(`/api/rss`);
+        // console.log(results.data);
+        yield put({type:"SET_FEED", action:results.data});
     }
     catch {
-        console.log('Error with fetching feed:', error);
+        console.log('Error with fetching feed:');
     }
 }
 

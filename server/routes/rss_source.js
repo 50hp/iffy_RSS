@@ -6,7 +6,8 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
-    
+    console.log('getting feed');
+
     if (req.isAuthenticated()) {
         const idToGet = req.user.id; 
         const queryText = `SELECT * FROM feeds
