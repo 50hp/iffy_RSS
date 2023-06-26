@@ -3,13 +3,11 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const rssSource =  require('../modules/rss.js');
 
-
 // console.log(rssSource);
 
 
 
 router.get('/:id', (req, res) => {
-  // GET route code here
 });
 
 /**

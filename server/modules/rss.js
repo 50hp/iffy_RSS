@@ -18,7 +18,6 @@ function sourceFetch() {
                 for ( row of dbRows ) {
                     let feed = await parser.parseURL(row.source_url);
                     for ( item of feed.items ) {
-
                         let queryStuff = `
                             INSERT INTO feeds (rss_id, creator, date, title, link, pubDate, content, contentSnippet, guid, isoDate, author, categories)
                             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12);`;
@@ -33,7 +32,7 @@ function sourceFetch() {
                                     item.guid,
                                     item.isoDate,
                                     item.author,
-                                    item.catagories]
+                                    toString(item.catagories)]
                         pool.query(queryStuff, values)
                         .then(results => {
                             console.log('succes', results);
