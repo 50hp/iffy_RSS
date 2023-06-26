@@ -2,40 +2,6 @@ const pool = require('../modules/pool');
 const Parser = require('rss-parser');
 const parser = new Parser();
 
-//
-//
-// function sourceFetch(user) {
-//   console.log('sourceFetch');    
-//   let dbRows = [];
-//   let feedReturn = Object;
-//   let queryText =`SELECT * FROM rss_sources WHERE user_id=1;`;
-//
-//   pool.query(queryText)
-//   .then(results => {
-//       dbRows.push(...results.rows);
-//         console.log(dbRows);
-//       let feedData = dbRows[0].source_url;
-//         (async () => {
-//
-//             let feed = await parser.parseURL(feedData);
-//             feedReturn = feed;
-//             console.log(feed);
-//               
-//                 let queryStuff = `UPDATE rss_sources SET output = $1 WHERE id=$2`;
-//                 pool.query(queryStuff, [feed, dbRows[0].user_id])
-//                 .then(results => {
-//                   console.log('success',results); 
-//                 }).catch(error => {
-//                   console.log('errror with query', queryStuff, error);
-//                 });
-//          })();    
-//
-//   }).catch(error => {
-//       console.log('error with query', queryText, error);
-//   });
-//   
-// }
-//
 
 function sourceFetch() {
     console.log('sourceFetch');    
@@ -51,13 +17,30 @@ function sourceFetch() {
                 
                 for ( row of dbRows ) {
                     let feed = await parser.parseURL(row.source_url);
-                    let queryStuff = `UPDATE rss_sources SET output = $1 WHERE id=$2`;
-                        pool.query(queryStuff, [feed, row.id])
+                    for ( item of feed.items ) {
+
+                        let queryStuff = `
+                            INSERT INTO feeds (rss_id, creator, date, title, link, pubDate, content, contentSnippet, guid, isoDate, author, categories)
+                            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12);`;
+                        let values =[row.id,
+                                    item.creator,
+                                    item.date,
+                                    item.title, 
+                                    item.link, 
+                                    item.pubDate,
+                                    item.content,
+                                    item.contentSnippet,
+                                    item.guid,
+                                    item.isoDate,
+                                    item.author,
+                                    item.catagories]
+                        pool.query(queryStuff, values)
                         .then(results => {
-                            console.log('success',results); 
+                            console.log('succes', results);
                         }).catch(error => {
-                            console.log('errror with query', queryStuff, error);
+                            console.log('error with query', queryStuff, error);
                         });
+                    }
                 }
 
                 console.log('end');
