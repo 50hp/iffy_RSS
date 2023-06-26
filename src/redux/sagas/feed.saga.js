@@ -6,7 +6,7 @@ function* fetchFeed() {
     console.log('in fetchFeed');
     try{
         const results = yield axios.get(`/api/rss`);
-        // console.log(results.data);
+        console.log(results.data);
         yield put({type:"SET_FEED", action:results.data});
     }
     catch {
