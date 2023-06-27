@@ -6,7 +6,7 @@ import FeedItem from './FeedItem/FeedItem';
 
 function UserFeed() {
     
-    const feed = useSelector(store => store.feedReducer);
+    const feed = useSelector(store => store.feed);
     const dispatch = useDispatch();
    
 
@@ -18,8 +18,8 @@ function UserFeed() {
         <>
         <p>as;dlkfjas;dlkfj</p>
         <div>
-            {feed?.map(item => (
-                <FeedItem key={item.id}item={item}/>
+            {feed?.map((item, i) => (
+                <FeedItem key={i}item={item}/>
             ))}
         </div>
         </>

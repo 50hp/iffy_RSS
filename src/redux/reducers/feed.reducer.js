@@ -1,7 +1,7 @@
 const feed = (state = [], action) => {
     switch (action.type) {
         case 'SET_FEED':
-            return [...state, action.payload];
+            return action.payload;
         default:
             return state;
     }
