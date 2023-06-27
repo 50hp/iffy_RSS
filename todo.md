@@ -17,7 +17,7 @@
 
 - [ ] archive view
     - [ ] server get route
-    - [ ] component for archive view 
+    - [x] component for archive view 
     - [ ] get saga/reducer
     - [ ] connect put routes to view
 
