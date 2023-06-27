@@ -6,7 +6,7 @@ import axios from 'axios';
 function* fetchSettings(){
     console.log('infetchsettings');
     try {
-        const results = yield axios.get('/api/settings');
+        const results = yield axios.get('/api/settings/sources');
         console.log(results.data);
         yield put({type:"SET_SETTINGS", payload: results.data});
     
