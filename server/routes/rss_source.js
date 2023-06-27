@@ -11,7 +11,8 @@ router.get('/', (req, res) => {
         const idToGet = req.user.id; 
         const queryText = `SELECT * FROM feeds
                            JOIN rss_sources ON feeds.rss_id = rss_sources.rss_id
-                           WHERE user_id = $1;`;
+                           WHERE user_id = $1
+                           ORDER BY post_id ASC;`;
         pool.query(queryText, [idToGet])
         .then(results => {
             res.send(results.rows);

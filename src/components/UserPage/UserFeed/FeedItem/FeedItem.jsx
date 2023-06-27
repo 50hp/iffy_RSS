@@ -7,8 +7,8 @@ import FeedContent from "./FeedContent/FeedContent";
 function FeedItem({item}) {
     
     const dispatch = useDispatch();
-    const [markRead, setMarkRead] = useState(false);
-    const [markSave, setMarkSave] = useState(false);
+    const [markRead, setMarkRead] = useState(item.isread);
+    const [markSave, setMarkSave] = useState(item.issaved);
     const [content, setContent] = useState(false);
     const [isContent, setIsContent] = useState(true);
     const handleClick = (button) => {
@@ -38,7 +38,7 @@ function FeedItem({item}) {
         (item.content === item.contentsnippet) ? (setIsContent(false)) : ('asdf')
     }, [])
 
-
+    console.log(markRead, markSave);
 
     return(
         <div>
