@@ -1,24 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-
-
+import UserSourceList from "./UserSources/UserSourceList";
 
 function UserSettings() {
-    
-    const dispatch = useDispatch();
-    const settings = useSelector(store => store.settings);
-    
-
-    useEffect(() => {
-        dispatch({type:"FETCH_SETTINGS"});
-    }, []);
-
-    return(
+   return(
         
         <div>
 
-            <p>asdlkfj;asldkjf</p>
-
+            <UserSourceList />
         </div>
     );
 

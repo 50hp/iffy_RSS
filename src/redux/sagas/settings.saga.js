@@ -3,13 +3,26 @@ import axios from 'axios';
 
 
 
-function* fetchSettings(){
+function* fetchSettings() {
     console.log('infetchsettings');
     try {
         const results = yield axios.get('/api/settings/sources');
         console.log(results.data);
-        yield put({type:"SET_SETTINGS", payload: results.data});
+        yield put({type:"SET_SETTINGS", payload: {sources: results.data}});
     
+    }
+
+    catch {
+        console.log('error with fetching settings');
+    }
+}
+
+function* postSettings(action) {
+    console.log('inpoostsettings');
+    console.log(action);
+    try {
+        yield axios.post('/api/settings', action.payload);
+        console.log('success');
     }
 
     catch {
@@ -22,11 +35,9 @@ function* fetchSettings(){
 
 
 
-
-
 function* settingsSaga() {
     yield takeLatest('FETCH_SETTINGS', fetchSettings);
-
+    yield takeLatest("POST_SOURCE", postSettings);
 
 
 }
