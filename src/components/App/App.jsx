@@ -19,7 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-
+import UserArchive from '../UserArchive/UserArchive.jsx';
 import './App.css';
 
 function App() {
@@ -59,6 +59,13 @@ function App() {
           >
             <UserPage />
           </ProtectedRoute>
+        <ProtectedRoute
+
+            exact
+            path="/archive"
+        >
+            <UserArchive />
+        </ProtectedRoute>
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage

@@ -15,11 +15,11 @@
     - [ ] render 10 post at a time - stretch
 - [ ] default feed view
 
-- [ ] archive view
-    - [ ] server get route
-    - [ ] component for archive view 
-    - [ ] get saga/reducer
-    - [ ] connect put routes to view
+- [x] archive view
+    - [x] server get route
+    - [x] component for archive view 
+    - [x] get saga/reducer
+    - [x] connect put routes to view
 
 - [ ] settings view
     - [ ] post route for new sources 
