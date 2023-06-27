@@ -38,7 +38,6 @@ function FeedItem({item}) {
         (item.content === item.contentsnippet) ? (setIsContent(false)) : ('asdf')
     }, [])
 
-    console.log(markRead, markSave);
 
     return(
         <div>
