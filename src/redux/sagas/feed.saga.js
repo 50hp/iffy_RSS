@@ -17,7 +17,7 @@ function* fetchFeed() {
 function* setRead(action) {
     console.log('insetread', action)
     try {
-        yield axios.put(`/api/rss/read/${action.payload.id}`, action.payload.state)
+        yield axios.put(`/api/rss/read/${action.payload.id}`, {state: action.payload.state})
         console.log('success');
     }
     catch {
@@ -28,7 +28,7 @@ function* setRead(action) {
 function* setSave(action) {
     console.log('insetsave', action);
     try {
-        yield axios.put(`/api/rss/save/${action.payload.id}`, action.payload.state);
+        yield axios.put(`/api/rss/save/${action.payload.id}`, {state: action.payload.state});
         console.log('success');
     }
     catch {

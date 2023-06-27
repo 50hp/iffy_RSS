@@ -20,7 +20,7 @@ function sourceFetch() {
                         let queryStuff = `
                             INSERT INTO feeds (rss_id, creator, title, link, pubDate, content, contentSnippet, guid, isoDate, author)
                             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`;
-                        let values =[row.id,
+                        let values =[row.rss_id,
                                     item.creator,
                                     item.title, 
                                     item.link, 

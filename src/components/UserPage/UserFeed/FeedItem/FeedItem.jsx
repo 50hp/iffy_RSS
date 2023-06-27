@@ -16,11 +16,17 @@ function FeedItem({item}) {
         switch(button) {
         case 'read':
             setMarkRead(!markRead);
-            dispatch({type:"SET_READ", payload:!markRead});
+            dispatch({type:"SET_READ", payload:{
+                                                state: !markRead,
+                                                id: item.post_id
+                                                }});
             return;
         case 'save':
             setMarkSave(!markSave);
-            dispatch({type:"SET_SAVE", payload:!markSave});
+            dispatch({type:"SET_SAVE", payload:{
+                                                state: !markSave,
+                                                id: item.post_id
+                                                }});
             return;
         case 'content':
             setContent(!content);
