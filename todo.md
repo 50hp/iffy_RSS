@@ -5,14 +5,14 @@
 
 - [x] rss parser integration
 
-- [ ] user home view
-    - [ ] server get route
-    - [ ] get saga/reducer
-    - [ ] put route for save
-    - [ ] save toggle button
-    - [ ] put route for mark read
-    - [ ] mark read button toggle
-
+- [x] user home view
+    - [x] server get route
+    - [x] get saga/reducer
+    - [x] put route for save
+    - [x] save toggle button
+    - [x] put route for mark read
+    - [x] mark read button toggle
+    - [ ] render 10 post at a time - stretch
 - [ ] default feed view
 
 - [ ] archive view

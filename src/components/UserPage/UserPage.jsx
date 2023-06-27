@@ -1,17 +1,18 @@
 import React from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector} from 'react-redux';
+import UserFeed from './UserFeed/UserFeed';
 
 function UserPage() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
-  const user = useSelector((store) => store.user);
-  return (
-    <div className="container">
-      <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
-      <LogOutButton className="btn" />
-    </div>
-  );
+    
+    const user = useSelector((store) => store.user);
+  
+
+
+    return (
+        <div className="container">
+            <UserFeed/> 
+        </div>
+    );
 }
 
 // this allows us to use <App /> in index.js
