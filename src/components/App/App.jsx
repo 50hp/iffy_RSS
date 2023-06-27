@@ -20,6 +20,8 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import UserArchive from '../UserArchive/UserArchive.jsx';
+import UserSettings from '../UserSettings/UserSettings.jsx';
+
 import './App.css';
 
 function App() {
@@ -65,6 +67,12 @@ function App() {
             path="/archive"
         >
             <UserArchive />
+        </ProtectedRoute>
+        <ProtectedRoute
+            exact
+            path="/settings"
+        >
+            <UserSettings />
         </ProtectedRoute>
 
           <ProtectedRoute
