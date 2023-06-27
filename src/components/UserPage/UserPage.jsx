@@ -1,6 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import UserFeed from './UserFeed/UserFeed';
+
 function UserPage() {
     
     const user = useSelector((store) => store.user);

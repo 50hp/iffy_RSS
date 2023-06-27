@@ -1,12 +1,18 @@
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import FeedContent from "./FeedContent/FeedContent";
+
+
 
 function FeedItem({item}) {
     
     const dispatch = useDispatch();
     const [markRead, setMarkRead] = useState(false);
     const [markSave, setMarkSave] = useState(false);
+    const [content, setContent] = useState(false);
+    const [isContent, setIsContent] = useState(true);
     const handleClick = (button) => {
+
         switch(button) {
         case 'read':
             setMarkRead(!markRead);
@@ -15,10 +21,16 @@ function FeedItem({item}) {
         case 'save':
             setMarkSave(!markSave);
             dispatch({type:"SET_SAVE", payload:!markSave});
-            return; 
+            return;
+        case 'content':
+            setContent(!content);
+            return;  
         }
     }
 
+    useEffect(() => {
+        (item.content === item.contentsnippet) ? (setIsContent(false)) : ('asdf')
+    }, [])
 
 
 
@@ -26,8 +38,21 @@ function FeedItem({item}) {
         <div>
 
             <h4>{item.title}</h4>
-            <span>{item.creator}</span>
-            <p dangerouslySetInnerHTML={{__html:item.content}}/>
+            <span>Date: {item.pubdate}</span>
+            <p>Author: {item.creator || item.author}</p>
+            {isContent ? (
+            content ? (
+                <button onClick={() => handleClick('content')}> Read Less </button>
+                ) : (
+                <button onClick={() => handleClick('content')}> Read More </button>
+                )
+            ) : (<></>)}
+
+
+            <FeedContent content={item.content}
+                         contentsnippet={item.contentsnippet}
+                         view={content} 
+            />
             
             {markRead ? (
                 <button onClick={()=> handleClick('read')}> Mark as UnRead </button>
