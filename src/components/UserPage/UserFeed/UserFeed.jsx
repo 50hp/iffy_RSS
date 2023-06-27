@@ -16,12 +16,11 @@ function UserFeed() {
 
     return(
         <>
-        <p>as;dlkfjas;dlkfj</p>
-        <div>
-            {feed?.map((item, i) => (
-                <FeedItem key={i}item={item}/>
-            ))}
-        </div>
+            <div>
+                {feed?.map((item, i) => (
+                    <FeedItem key={i}item={item}/>
+                ))}
+            </div>
         </>
     );
 

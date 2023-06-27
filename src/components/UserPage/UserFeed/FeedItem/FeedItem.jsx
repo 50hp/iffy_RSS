@@ -3,7 +3,11 @@
 function FeedItem({item}) {
 
     return(
-        <p>{item.title}</p>
+        <div>
+            <h4>{item.title}</h4>
+            <span>{item.creator}</span>
+            <p dangerouslySetInnerHTML={{__html:item.content}}/>
+        </div>
     );
 
 
