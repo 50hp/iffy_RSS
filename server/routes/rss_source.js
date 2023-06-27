@@ -56,7 +56,6 @@ router.put('/read/:id', (req, res) => {
         const queryText =`UPDATE feeds SET isread = $1 WHERE post_id=$2;`;
         pool.query(queryText, [state, idToUpdate])
         .then(results => {
-            console.log(results);
             res.sendStatus(200);
         }).catch(error => {
             console.log('error with query', queryText, error);
@@ -81,7 +80,6 @@ router.put('/save/:id', (req, res) => {
         const queryText =`UPDATE feeds SET issaved = $1 WHERE post_id=$2;`;
         pool.query(queryText, [state, idToUpdate])
         .then(results => {
-            console.log(results);
             res.sendStatus(200);
         }).catch(error => {
             console.log('error with query', queryText, error);
