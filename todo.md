@@ -21,9 +21,10 @@
     - [x] get saga/reducer
     - [x] connect put routes to view
 
-- [ ] settings view
-    - [ ] post route for new sources 
-    - [ ] delete route for deleting sources
+- [x] settings view
+    - [x] post route for new sources 
+    - [x] delete route for deleting sources
+    - [ ] mute route to set a sourece to not be parsed
 
 - [ ] Nav Bar component
     - [ ] moved to a side bar
