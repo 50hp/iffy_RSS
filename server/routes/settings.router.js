@@ -1,6 +1,8 @@
 const express = require('express');
 const pool = require('../modules/pool');
+const sourceFetch = require('../modules/rss.js');
 const router = express.Router();
+let sourceFeed = require('../modules/rss.js');
 
 router.get('/sources', (req, res) => {
     console.log('getting sources for settings');
@@ -33,7 +35,7 @@ router.post('/', (req, res) => {
         pool.query(queryText, values)
         .then(results => {
             res.sendStatus(201);
-            const rssFeed = require('../modules/rss.js');
+            sourceFetch(req.user.id);
         }).catch(error => {
             console.log('error with query', queryText, error);
             res.sendStatus(500);

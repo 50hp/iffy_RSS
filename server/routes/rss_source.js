@@ -1,7 +1,7 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-// const rssSource =  require('../modules/rss.js');
+let sourceFeed = require('../modules/rss.js');
 
 
 router.get('/', (req, res) => {
@@ -64,10 +64,6 @@ router.put('/read/:id', (req, res) => {
     } else {
         res.sendStatus(403);
     }
-
-
-
-    
 });
 
 //router to update save state in the db
@@ -90,11 +86,32 @@ router.put('/save/:id', (req, res) => {
     } else {
         res.sendStatus(403);
     }
+});
 
+//router to delete a users source
+//add authorization check to delete query
+router.delete('/:id', async (req, res) => {
+    console.log('in delete');
+    if (req.isAuthenticated()) {
+        const user_id = req.user.id;
+        const client = await pool.connect();
+        try {
+            const idToDelete = req.params.id;
+            const queryStuff = `UPDATE feeds SET rss_id = NULL WHERE rss_id = $1;`;
+            await client.query(queryStuff, [idToDelete]);
+            const queryText =`DELETE FROM rss_sources WHERE rss_id=$1;`;
+            await client.query(queryText, [idToDelete]);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            console.log('success');
+            client.release();
+            sourceFeed(user_id);
+        }
 
-
-
-
+    } else {
+        res.sendStatus(403);
+    }
 });
 
 

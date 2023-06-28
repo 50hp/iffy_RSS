@@ -30,16 +30,26 @@ function* postSettings(action) {
     }
 }
 
+function* sourceDelete(action) {
+    console.log('insourcedelete');
+    console.log(action);
+    try {
+        yield axios.delete(`/api/rss/${action.payload}`);
+        console.log('success');
+    }
 
-
+    catch {
+        console.log('error with fetching settings');
+    }
+}
 
 
 
 function* settingsSaga() {
     yield takeLatest('FETCH_SETTINGS', fetchSettings);
     yield takeLatest("POST_SOURCE", postSettings);
-
-
+    yield takeLatest("DELETE_SOURCE", sourceDelete);
+    
 }
 
 export default settingsSaga;
