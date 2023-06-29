@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import FeedContent from "./FeedContent/FeedContent";
-
+import 'terminal.css'
 
 
 function FeedItem({item}) {
@@ -40,38 +40,38 @@ function FeedItem({item}) {
 
 
     return(
-        <div>
 
-            <h4>{item.title}</h4>
-            <span>Date: {item.pubdate}</span>
-            <p>Author: {item.creator || item.author}</p>
-            {isContent ? (
-            content ? (
-                <button onClick={() => handleClick('content')}> Read Less </button>
-                ) : (
-                <button onClick={() => handleClick('content')}> Read More </button>
-                )
-            ) : (<></>)}
+            <div class="terminal-card">
 
-
-            <FeedContent content={item.content}
-                         contentsnippet={item.contentsnippet}
-                         view={content} 
-            />
-            
-            {markRead ? (
-                <button onClick={()=> handleClick('read')}> Mark as UnRead </button>
-                ) : ( 
-                <button onClick={()=> handleClick('read')}> Mark as Read </button>
-                )}
-            {markSave ? (
-                <button onClick={()=> handleClick('save')}> UnSave </button>
-                ) : (
-                <button onClick={()=> handleClick('save')}> Save </button>
-                )} 
+                <h4>{item.title}</h4>
+                <span>Date: {item.pubdate}</span>
+                <p>Author: {item.creator || item.author}</p>
+                {isContent ? (
+                content ? (
+                    <button className="btn btn-default btn-ghost" onClick={() => handleClick('content')}> Read Less </button>
+                    ) : (
+                    <button className="btn btn-default btn-ghost" onClick={() => handleClick('content')}> Read More </button>
+                    )
+                ) : (<></>)}
 
 
-        </div>
+                <FeedContent content={item.content}
+                             contentsnippet={item.contentsnippet}
+                             view={content} 
+                />
+                
+                {markRead ? (
+                    <button className="btn btn-default btn-ghost" onClick={()=> handleClick('read')}> Mark as UnRead </button>
+                    ) : ( 
+                    <button className="btn btn-default btn-ghost" onClick={()=> handleClick('read')}> Mark as Read </button>
+                    )}
+                {markSave ? (
+                    <button className="btn btn-default btn-ghost" onClick={()=> handleClick('save')}> UnSave </button>
+                    ) : (
+                    <button className="btn btn-default btn-ghost" onClick={()=> handleClick('save')}> Save </button>
+                    )} 
+
+            </div>
     );
 
 

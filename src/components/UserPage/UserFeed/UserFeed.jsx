@@ -2,7 +2,7 @@ import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { useEffect } from 'react';
 import FeedItem from './FeedItem/FeedItem';
-
+import 'terminal.css'
 
 function UserFeed() {
     
@@ -15,13 +15,12 @@ function UserFeed() {
     }, []);
 
     return(
-        <>
-            <div>
+            <div class="terminal-timeline">
                 {feed?.map((item, i) => (
                     <FeedItem key={i}item={item}/>
                 ))}
+                <button className="btn btn-primary btn-block" >Load More</button>          
             </div>
-        </>
     );
 
 
