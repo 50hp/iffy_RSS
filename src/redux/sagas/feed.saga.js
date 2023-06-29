@@ -25,7 +25,7 @@ function* setRead(action) {
 
 function* setSave(action) {
     try {
-        yield axios.put(`/api/rss/save/${action.payload.id}`, {state: action.payload.state});
+        yield axios.post(`/api/rss/save`, action.payload);
         console.log('success');
     }
     catch {
