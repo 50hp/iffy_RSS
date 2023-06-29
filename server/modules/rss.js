@@ -8,6 +8,7 @@ const parser = new Parser();
      const client = await pool.connect()
      try {
          await client.query('BEGIN');
+         const updateTime = await client.query('UPDATE "user" SET feedgentime = CURRENT_TIMESTAMP WHERE id=$1;',[user_id]);
          const deletStatus = await client.query(`DELETE FROM feeds
                              USING rss_sources
                              WHERE feeds.rss_id = rss_sources.rss_id 
@@ -17,7 +18,7 @@ const parser = new Parser();
          console.log(commitStatus);
     } catch (error) {
          await client.query('ROLLBACK')
-         console.log('Error with delete of', deleteStatus, error);
+         console.log('Error with delete of', error);
     }
      
      try {
