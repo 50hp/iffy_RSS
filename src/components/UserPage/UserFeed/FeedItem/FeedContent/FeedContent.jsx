@@ -1,4 +1,4 @@
-
+import 'terminal.css'
 
 
 
@@ -8,17 +8,16 @@ function FeedContent({content, contentsnippet, view}) {
 
 
     return(
-        <>
+        <div>
             {view ? (
                 <p dangerouslySetInnerHTML={{__html:content}}/>
             ) : (
                 <div> 
-                    <p dangerouslySetInnerHTML={{__html:contentsnippet}}/>
                 </div>
             )} 
         
 
-        </>
+        </div>
     );
 
 

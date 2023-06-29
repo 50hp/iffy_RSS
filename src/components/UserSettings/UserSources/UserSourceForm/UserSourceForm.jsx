@@ -24,25 +24,31 @@ function UserSourceForm() {
 
         <div>
             <form onSubmit={(event)=> handleSubmit(event)}>
-                <legend>Add Souce</legend>
+                <fieldset>
+                    <legend>Add Souce</legend>
                 
-                <label htmlFor="inputOne">Source Name</label>
-                <input name="inputOne"
-                       value={inputOne}
-                       onChange={(e)=>setInputOne(e.target.value)}
-                       required
-                       placeholder="Name"
-                       type="text"
-                />
-                <label htmlFor="inputTwo">Source URL</label>
-                 <input name="inputTow"
-                       value={inputTwo}
-                       onChange={(e)=>setInputTwo(e.target.value)}
-                       required
-                       placeholder="url"
-                       type="text"
-                />               
-                <button type="submit">ADD</button>
+                    <div className="form-group">     
+                        <label htmlFor="inputOne">Source Name</label>
+                        <input name="inputOne"
+                               value={inputOne}
+                               onChange={(e)=>setInputOne(e.target.value)}
+                               required
+                               placeholder="Name"
+                               type="text"
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="inputTwo">Source URL</label>
+                         <input name="inputTow"
+                               value={inputTwo}
+                               onChange={(e)=>setInputTwo(e.target.value)}
+                               required
+                               placeholder="url"
+                               type="text"
+                        />   
+                    </div>
+                    <button className="btn btn-default" type="submit">ADD</button>
+                </fieldset>
             </form>
 
 

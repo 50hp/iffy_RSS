@@ -5,7 +5,7 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-
+import 'terminal.css'
 import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
@@ -23,6 +23,7 @@ import UserArchive from '../UserArchive/UserArchive.jsx';
 import UserSettings from '../UserSettings/UserSettings.jsx';
 
 import './App.css';
+import "../../terminal.css"
 
 function App() {
   const dispatch = useDispatch();

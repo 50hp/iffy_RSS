@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import UserSources from "./UserSources.jsx";
 import UserSourceForm from "./UserSourceForm/UserSourceForm.jsx";
-
+import "../../../terminal.css"
 function UserSourceList(){
     
     const dispatch = useDispatch();
