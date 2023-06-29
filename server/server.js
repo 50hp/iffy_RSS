@@ -11,6 +11,7 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const rssSourceRouter = require('./routes/rss_source.js');
 const settingsRouter = require('./routes/settings.router.js');
+const savesRouter = require('./routes/save.route.js');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -27,6 +28,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/rss', rssSourceRouter);
 app.use('/api/settings', settingsRouter);
+app.use('/api/saves', savesRouter);
 
 
 // Serve static files

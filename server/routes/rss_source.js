@@ -5,7 +5,8 @@ let sourceFeed = require('../modules/rss.js');
 let dayFeedChecker = require('../modules/dayFeedChecker.js');
 
 //set up so get sends 10 posts at a time
-router.get('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
+    console.log(req.params.id);
     console.log('getting feed');
 
     if (req.isAuthenticated()) {
@@ -67,27 +68,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/saves', (req, res) => {
-    console.log('getting saves');
-
-    if (req.isAuthenticated()) {
-        const idToGet = req.user.id; 
-        const queryText = `SELECT * FROM feeds
-                           JOIN rss_sources ON feeds.rss_id = rss_sources.rss_id
-                           WHERE user_id = $1 AND issaved = true
-                           ORDER BY post_id ASC;`;
-        pool.query(queryText, [idToGet])
-        .then(results => {
-            res.send(results.rows);
-        }).catch(error => {
-            console.log('error with query', queryText, error);
-            res.sendStatus(500);
-        });
-    } else {
-        res.sendStatus(403);
-    }
-});
-
 //router to update read state in the db
 router.put('/read/:id', (req, res) => {
     console.log('put read');
@@ -103,41 +83,6 @@ router.put('/read/:id', (req, res) => {
             console.log('error with query', queryText, error);
             res.sendStatus(500);
         });
-    } else {
-        res.sendStatus(403);
-    }
-});
-
-//router to update save state in the db
-router.post('/save', (req, res) => {
-    console.log('put save');
-    if (req.isAuthenticated()) {
-        const user_id = req.user.id;
-        const item = req.body;
-        console.log(user_id, item);
-        const queryStuff = `
-                    INSERT INTO saves (user_id, creator, title, link, pubDate, content, contentSnippet, guid, isoDate, author, isread)
-                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`;
-        const values =[user_id,
-                    item.creator,
-                    item.title, 
-                    item.link, 
-                    item.pubdate,
-                    item.content,
-                    item.contentsnippet,
-                    item.guid,
-                    item.isodate,
-                    item.author,
-                    item.isread];
-        pool.query(queryStuff, values)
-        .then(results => {
-            console.log(results.rows);
-            res.sendStatus(200);
-        }).catch(error => {
-            res.sendStatus(500);
-            console.log('error with queryText', queryText, error);
-        });
-
     } else {
         res.sendStatus(403);
     }
