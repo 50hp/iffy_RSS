@@ -64,7 +64,23 @@ router.get('/:id', async (req, res) => {
              }
         }
     } else {
-        res.sendStatus(403);
+              const client = await pool.connect();
+             try {
+        
+                 const queryText = `SELECT * FROM feeds
+                                    JOIN rss_sources ON feeds.rss_id = rss_sources.rss_id
+                                    WHERE user_id = 1
+                                    ORDER BY post_id ASC;`;
+                 const results = await client.query(queryText);
+                 res.send(results.rows); 
+             } catch (error) {
+                 console.log('error with query', error);
+                 res.sendStatus(500);
+             } finally {
+                 client.release();
+                 console.log('finished with get');
+             }  
+        // res.sendStatus(403);
     }
 });
 
