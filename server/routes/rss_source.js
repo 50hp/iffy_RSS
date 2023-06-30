@@ -5,9 +5,12 @@ let sourceFeed = require('../modules/rss.js');
 let dayFeedChecker = require('../modules/dayFeedChecker.js');
 
 //set up so get sends 10 posts at a time
-router.get('/:id', async (req, res) => {
-    console.log(req.params.id);
+router.get('/', async (req, res) => {
+    console.log(req.query.offset);
     console.log('getting feed');
+
+    const limit = 10;
+    const offset = req.query.offset || 0;
 
     if (req.isAuthenticated()) {
         const user_id = req.user.id;
@@ -33,8 +36,10 @@ router.get('/:id', async (req, res) => {
                  const queryText = `SELECT * FROM feeds
                                     JOIN rss_sources ON feeds.rss_id = rss_sources.rss_id
                                     WHERE user_id = $1
-                                    ORDER BY post_id ASC;`;
-                 const results = await client.query(queryText, [user_id]);
+                                    ORDER BY post_id ASC
+                                    LIMIT $2
+                                    OFFSET $3;`;
+                 const results = await client.query(queryText, [user_id, limit, offset]);
                  res.send(results.rows); 
              } catch (error) {
                  console.log('error with query', error);
@@ -52,8 +57,10 @@ router.get('/:id', async (req, res) => {
                  const queryText = `SELECT * FROM feeds
                                     JOIN rss_sources ON feeds.rss_id = rss_sources.rss_id
                                     WHERE user_id = $1
-                                    ORDER BY post_id ASC;`;
-                 const results = await client.query(queryText, [user_id]);
+                                    ORDER BY post_id ASC
+                                    LIMIT $2
+                                    OFFSET $3;`;
+                 const results = await client.query(queryText, [user_id, limit, offset]);
                  res.send(results.rows); 
              } catch (error) {
                  console.log('error with query', error);
@@ -70,8 +77,10 @@ router.get('/:id', async (req, res) => {
                  const queryText = `SELECT * FROM feeds
                                     JOIN rss_sources ON feeds.rss_id = rss_sources.rss_id
                                     WHERE user_id = 1
-                                    ORDER BY post_id ASC;`;
-                 const results = await client.query(queryText);
+                                    ORDER BY post_id ASC
+                                    LIMIT $1
+                                    OFFSET $2;`;
+                 const results = await client.query(queryText, [limit, offset]);
                  res.send(results.rows); 
              } catch (error) {
                  console.log('error with query', error);

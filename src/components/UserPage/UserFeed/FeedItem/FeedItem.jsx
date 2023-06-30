@@ -35,7 +35,7 @@ function FeedItem({item}) {
     useEffect(() => {
         (item.content === item.contentsnippet) ? (setIsContent(false)) : ('asdf')
     }, [])
-    console.log(user);
+
     return(
 
             <div class="terminal-card">
