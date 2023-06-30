@@ -4,7 +4,7 @@ import axios from 'axios';
 
 function* fetchFeed() {
     try{
-        const results = yield axios.get(`/api/rss`);
+        const results = yield axios.get(`/api/rss/1`);
         console.log(results.data);
         yield put({type:"SET_FEED", payload: results.data});
     }
@@ -25,7 +25,7 @@ function* setRead(action) {
 
 function* setSave(action) {
     try {
-        yield axios.put(`/api/rss/save/${action.payload.id}`, {state: action.payload.state});
+        yield axios.post(`/api/saves`, action.payload);
         console.log('success');
     }
     catch {
@@ -35,7 +35,7 @@ function* setSave(action) {
 function* fetchSaves() {
     console.log('in fetchSaves');
     try{
-        const results = yield axios.get(`/api/rss/saves`);
+        const results = yield axios.get(`/api/saves`);
         console.log(results.data);
         yield put({type:"SET_SAVES", payload: results.data});
     }

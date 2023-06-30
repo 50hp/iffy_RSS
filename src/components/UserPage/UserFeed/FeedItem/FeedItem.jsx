@@ -23,10 +23,7 @@ function FeedItem({item}) {
             return;
         case 'save':
             setMarkSave(!markSave);
-            dispatch({type:"SET_SAVE", payload:{
-                                                state: !markSave,
-                                                id: item.post_id
-                                                }});
+            dispatch({type:"SET_SAVE", payload: item});
             return;
         case 'content':
             setContent(!content);
