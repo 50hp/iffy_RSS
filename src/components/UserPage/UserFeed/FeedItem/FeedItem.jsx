@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import FeedContent from "./FeedContent/FeedContent";
 import 'terminal.css'
@@ -7,6 +7,7 @@ import 'terminal.css'
 function FeedItem({item}) {
     
     const dispatch = useDispatch();
+    const user = useSelector(store => store.user);
     const [markRead, setMarkRead] = useState(item.isread);
     const [markSave, setMarkSave] = useState(item.issaved);
     const [content, setContent] = useState(false);
@@ -34,8 +35,7 @@ function FeedItem({item}) {
     useEffect(() => {
         (item.content === item.contentsnippet) ? (setIsContent(false)) : ('asdf')
     }, [])
-
-
+    console.log(user);
     return(
 
             <div class="terminal-card">
@@ -56,17 +56,20 @@ function FeedItem({item}) {
                              contentsnippet={item.contentsnippet}
                              view={content} 
                 />
-                
-                {markRead ? (
-                    <button className="btn btn-default btn-ghost" onClick={()=> handleClick('read')}> Mark as UnRead </button>
-                    ) : ( 
-                    <button className="btn btn-default btn-ghost" onClick={()=> handleClick('read')}> Mark as Read </button>
-                    )}
-                {markSave ? (
-                    <button className="btn btn-default btn-ghost" onClick={()=> handleClick('save')}> UnSave </button>
-                    ) : (
-                    <button className="btn btn-default btn-ghost" onClick={()=> handleClick('save')}> Save </button>
-                    )} 
+                {(user.id) ? (
+                    <div>
+                        {markRead ? (
+                            <button className="btn btn-default btn-ghost" onClick={()=> handleClick('read')}> Mark as UnRead </button>
+                            ) : ( 
+                            <button className="btn btn-default btn-ghost" onClick={()=> handleClick('read')}> Mark as Read </button>
+                            )}
+                        {markSave ? (
+                            <button className="btn btn-default btn-ghost" onClick={()=> handleClick('save')}> UnSave </button>
+                            ) : (
+                            <button className="btn btn-default btn-ghost" onClick={()=> handleClick('save')}> Save </button>
+                            )} 
+                    </div>
+                ) : ( <></> )}
 
             </div>
     );

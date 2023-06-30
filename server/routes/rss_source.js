@@ -69,9 +69,9 @@ router.get('/:id', async (req, res) => {
         
                  const queryText = `SELECT * FROM feeds
                                     JOIN rss_sources ON feeds.rss_id = rss_sources.rss_id
-                                    WHERE user_id = $1
+                                    WHERE user_id = 1
                                     ORDER BY post_id ASC;`;
-                 const results = await client.query(queryText, [user_id]);
+                 const results = await client.query(queryText);
                  res.send(results.rows); 
              } catch (error) {
                  console.log('error with query', error);

@@ -13,7 +13,6 @@ function UserFeed() {
     useEffect(() => {
         dispatch({type:"FETCH_FEED"});
     }, []);
-
     return(
             <div class="terminal-timeline">
                 {feed?.map((item, i) => (
