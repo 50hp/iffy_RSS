@@ -20,7 +20,7 @@
     - [x] component for archive view 
     - [x] get saga/reducer
     - [x] connect put routes to view
-    - [ ] refactor save to a new table
+    - [x] refactor save to a new table
 - [x] settings view
     - [x] post route for new sources 
     - [x] delete route for deleting sources
