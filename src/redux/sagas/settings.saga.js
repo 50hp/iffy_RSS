@@ -39,16 +39,29 @@ function* sourceDelete(action) {
     }
 
     catch {
-        console.log('error with fetching settings');
+        console.log('error with deleting source');
     }
 }
 
+function* sourceMute(action) {
+    console.log('insourceMute');
+    console.log(action);
+    try {
+        yield axios.put(`/api/settings/${action.payload.rss_id}`, action.payload);
+        console.log('success');
+    }
+
+    catch {
+        console.log('error with muting source');
+    }
+}
 
 
 function* settingsSaga() {
     yield takeLatest('FETCH_SETTINGS', fetchSettings);
     yield takeLatest("POST_SOURCE", postSettings);
     yield takeLatest("DELETE_SOURCE", sourceDelete);
+    yield takeLatest("MUTE_SOURCE", sourceMute);
     
 }
 
