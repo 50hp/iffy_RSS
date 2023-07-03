@@ -47,7 +47,7 @@ function* sourceMute(action) {
     console.log('insourceMute');
     console.log(action);
     try {
-        yield axios.put(`/api/rss/${action.payload.rss_id}`, action.payload);
+        yield axios.put(`/api/settings/${action.payload.rss_id}`, action.payload);
         console.log('success');
     }
 
