@@ -13,7 +13,7 @@
     - [x] put route for mark read
     - [x] mark read button toggle
     - [ ] render 10 post at a time - stretch
-- [ ] default feed view
+- [x] default feed view
 
 - [x] archive view
     - [x] server get route
@@ -24,7 +24,7 @@
 - [x] settings view
     - [x] post route for new sources 
     - [x] delete route for deleting sources
-    - [ ] mute route to set a sourece to not be parsed
+    - [x] mute route to set a sourece to not be parsed
 
 - [ ] Nav Bar component
     - [ ] moved to a side bar
