@@ -75,10 +75,10 @@ router.get('/', async (req, res) => {
                  console.log('error with query', error);
                  res.sendStatus(500);
              } finally {
-                 // client.release();
+                 client.release();
                  console.log('finished with get');
              }
-            console.log('outside finally');
+            // console.log('outside finally');
         }
     } else {
             
