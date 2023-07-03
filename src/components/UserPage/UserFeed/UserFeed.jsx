@@ -10,7 +10,9 @@ function UserFeed() {
     const dispatch = useDispatch();
     const [offset, setOffset] = useState(0);   
     const loadMore = () => {
+
         setOffset(feed.length);
+        console.log('setOffset');
         dispatch({type:"LOAD_MORE", payload: offset}); 
     }
 

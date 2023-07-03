@@ -8,51 +8,58 @@ let dayFeedChecker = require('../modules/dayFeedChecker.js');
 router.get('/', async (req, res) => {
     console.log(req.query.offset);
     console.log('getting feed');
-
     const limit = 10;
     const offset = req.query.offset || 0;
 
     if (req.isAuthenticated()) {
         const user_id = req.user.id;
-        let feedState = Boolean;
-        try { 
-            feedState = await dayFeedChecker(user_id);
-            console.log(feedState);
-        } catch {
-            console.log('error');
-        }
+        const feedState = await dayFeedChecker(user_id);
+        // try { 
+        //     console.log('get route first route');
+        //     feedState = await dayFeedChecker(user_id);
+        // } catch {
+        //     res.sendStatus(500);
+        //     console.log('error');
+        //     // return
+        // }
         //conditional to check to see if the feed needs to be regend
         if (!feedState) {
             console.log('need to gen');
          try {
-             await sourceFeed(user_id);
+            await sourceFeed(user_id);
+             res.sendStatus(200);
+            console.log('get route gen ');
          } catch (error) {
              console.log('error with sourceFeed', error);
              res.sendStatus(500);
-         } finally {
-             const client = await pool.connect();
-             try {
-        
-                 const queryText = `SELECT * FROM feeds
-                                    JOIN rss_sources ON feeds.rss_id = rss_sources.rss_id
-                                    WHERE user_id = $1
-                                    ORDER BY post_id ASC
-                                    LIMIT $2
-                                    OFFSET $3;`;
-                 const results = await client.query(queryText, [user_id, limit, offset]);
-                 res.send(results.rows); 
-             } catch (error) {
-                 console.log('error with query', error);
-                 res.sendStatus(500);
-             } finally {
-                 client.release();
-                 console.log('finished with get');
-             }
+             // return
          }
+         
+         // const client = await pool.connect();
+         // try {
+         //
+         //     const queryText = `SELECT * FROM feeds
+         //                        JOIN rss_sources ON feeds.rss_id = rss_sources.rss_id
+         //                        WHERE user_id = $1
+         //                        ORDER BY post_id ASC
+         //                        LIMIT $2
+         //                        OFFSET $3;`;
+         //     const results = await client.query(queryText, [user_id, limit, offset]);
+         //     res.send(results.rows); 
+         // } catch (error) {
+         //     console.log('error with query', error);
+         //     res.sendStatus(500);
+         //     // return;
+         // } finally {
+         //     client.release();
+         //     console.log('finished with get');
+         // }
+         
         } else {
             console.log('dont need to gen');
              const client = await pool.connect();
              try {
+                 console.log('dont need to gen try');
         
                  const queryText = `SELECT * FROM feeds
                                     JOIN rss_sources ON feeds.rss_id = rss_sources.rss_id
@@ -61,18 +68,22 @@ router.get('/', async (req, res) => {
                                     LIMIT $2
                                     OFFSET $3;`;
                  const results = await client.query(queryText, [user_id, limit, offset]);
+                 // console.log(results);
                  res.send(results.rows); 
              } catch (error) {
+                 console.log('dont need to gen catch');
                  console.log('error with query', error);
                  res.sendStatus(500);
              } finally {
-                 client.release();
+                 // client.release();
                  console.log('finished with get');
              }
+            console.log('outside finally');
         }
     } else {
-              const client = await pool.connect();
-             try {
+            
+            const client = await pool.connect();
+            try {
         
                  const queryText = `SELECT * FROM feeds
                                     JOIN rss_sources ON feeds.rss_id = rss_sources.rss_id
@@ -85,11 +96,11 @@ router.get('/', async (req, res) => {
              } catch (error) {
                  console.log('error with query', error);
                  res.sendStatus(500);
+                 return
              } finally {
                  client.release();
                  console.log('finished with get');
              }  
-        // res.sendStatus(403);
     }
 });
 
@@ -126,14 +137,14 @@ router.delete('/:id', async (req, res) => {
             await client.query(queryStuff, [idToDelete]);
             const queryText =`DELETE FROM rss_sources WHERE rss_id=$1;`;
             await client.query(queryText, [idToDelete]);
-            const queryWords = `DELETE FROM feeds WHERE rss_id = NULL;`;
+            const queryWords = `DELETE FROM feeds WHERE rss_id IS NULL;`;
             await client.query(queryWords);
+            await sourceFeed(user_id);
         } catch (error) {
             console.log(error);
         } finally {
             console.log('success');
             client.release();
-            sourceFeed(user_id);
         }
 
     } else {
