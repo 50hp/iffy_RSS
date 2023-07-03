@@ -12,6 +12,7 @@ function FeedItem({item}) {
     const [markSave, setMarkSave] = useState(item.issaved);
     const [content, setContent] = useState(false);
     const [isContent, setIsContent] = useState(true);
+    
     const handleClick = (button) => {
 
         switch(button) {
@@ -32,44 +33,61 @@ function FeedItem({item}) {
         }
     }
 
-    useEffect(() => {
+    const onLoad = () => {
         (item.content === item.contentsnippet) ? (setIsContent(false)) : ('asdf')
+        setMarkRead(item.isread);
+        console.log(markRead);
+    }
+
+    useEffect(() => {
+        onLoad();
     }, [])
-    console.log(user);
+    // console.log(user);
     return(
 
             <div class="terminal-card">
 
                 <h4>{item.title}</h4>
-                <span>Date: {item.pubdate}</span>
-                <p>Author: {item.creator || item.author}</p>
-                {isContent ? (
-                content ? (
-                    <button className="btn btn-default btn-ghost" onClick={() => handleClick('content')}> Read Less </button>
-                    ) : (
-                    <button className="btn btn-default btn-ghost" onClick={() => handleClick('content')}> Read More </button>
-                    )
-                ) : (<></>)}
 
-
-                <FeedContent content={item.content}
-                             contentsnippet={item.contentsnippet}
-                             view={content} 
-                />
-                {(user.id) ? (
-                    <div>
-                        {markRead ? (
-                            <button className="btn btn-default btn-ghost" onClick={()=> handleClick('read')}> Mark as UnRead </button>
-                            ) : ( 
-                            <button className="btn btn-default btn-ghost" onClick={()=> handleClick('read')}> Mark as Read </button>
-                            )}
-                        {markSave ? (
-                            <button className="btn btn-default btn-ghost" onClick={()=> handleClick('save')}> UnSave </button>
+        {(!markRead) ? (   
+            <>
+                    <span>Date: {item.pubdate}</span>
+                    <p>Author: {item.creator || item.author}</p>
+                    {isContent ? (
+                        content ? (
+                            <button className="btn btn-default btn-ghost" onClick={() => handleClick('content')}> Read Less </button>
                             ) : (
-                            <button className="btn btn-default btn-ghost" onClick={()=> handleClick('save')}> Save </button>
-                            )} 
-                    </div>
-                ) : ( <></> )}
+                            <button className="btn btn-default btn-ghost" onClick={() => handleClick('content')}> Read More </button>
+                            )
+                        ) : (<></>)}
+
+
+                    <FeedContent content={item.content}
+                                 contentsnippet={item.contentsnippet}
+                                 view={content} 
+                    />
+                    {(user.id) ? (
+                        <div>
+                           {markSave ? (
+                                <button className="btn btn-default btn-ghost" onClick={()=> handleClick('save')}> UnSave </button>
+                                ) : (
+                                <button className="btn btn-default btn-ghost" onClick={()=> handleClick('save')}> Save </button>
+                                )} 
+                        </div>
+                    ) : ( <></> )}
+
+               </> ) : (
+
+                        <></>
+                )
+                
+        } 
+
+        {markRead ? (
+                <button className="btn btn-default btn-ghost" onClick={()=> handleClick('read')}> Expand </button>
+                ) : ( 
+                <button className="btn btn-default btn-ghost" onClick={()=> handleClick('read')}>  Collapse  </button>
+                )}
 
             </div>
     );
