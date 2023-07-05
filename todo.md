@@ -26,9 +26,9 @@
     - [x] delete route for deleting sources
     - [x] mute route to set a sourece to not be parsed
 
-- [ ] Nav Bar component
-    - [ ] moved to a side bar
+- [x] Nav Bar component
+    - [x] moved to a side bar
 
 - [ ] Syling
-    - [ ] Formate the nav bar better
-    - [ ] Fix conditional rendering
+    - [x] Formate the nav bar better
+    - [x] Fix conditional rendering
