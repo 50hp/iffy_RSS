@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
 
 
 router.post('/', async (req, res) => {
-    console.log('put save');
+    console.log('post save');
     if (req.isAuthenticated()) {
         const client = await pool.connect();
         const user_id = req.user.id;
@@ -65,10 +65,45 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.put("/:id", (req, res) => {
+    console.log('put save read');
+    if (req.isAuthenticated()) {
+        const idToUpdate = req.params.id;
+        const state = req.body.state;
+        console.log(state, idToUpdate);
+        const queryText =`UPDATE saves SET isread = $1 WHERE post_id=$2;`;
+        pool.query(queryText, [state, idToUpdate])
+        .then(results => {
+            res.sendStatus(200);
+        }).catch(error => {
+            console.log('error with query', queryText, error);
+            res.sendStatus(500);
+        });
+    }
+     else {
+        res.sendStatus(403);
+     } 
 
+});
 
+router.delete("/:id", (req, res) => {
+    console.log('in delete');
+    if (req.isAuthenticated()) {
+        const user_id = req.user.id;
+        const idToDelete = req.params.id;
+        const queryWords = `DELETE FROM saves WHERE post_id = $1;`;
+        pool.query(queryWords, [idToDelete])
+        .then(results => {
+            res.sendStatus(200);
+        }).catch(error => {
+            console.log('error with query', queryWords, error);
+            res.sendStatus(500);
+        });
 
-
+    } else {
+        res.sendStatus(403);
+    }
+});
 
 
 

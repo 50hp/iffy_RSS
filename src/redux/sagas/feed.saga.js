@@ -45,9 +45,9 @@ function* fetchSaves() {
 }
 
 function* setSaveRead(action) {
-    
+    console.log(action); 
     try {
-        yield axios.put(`/api/saves/${action.payload.post_id}`, {state:action.payload.state});
+        yield axios.put(`/api/saves/${action.payload.id}`, {state:action.payload.state});
     }
     catch {
         console.log('Error with archive mark read post');
@@ -57,7 +57,8 @@ function* setSaveRead(action) {
 function* unSave(action) {
 
     try {
-        yield axios.put(`/api/saves/${action.paylad}`);
+        yield axios.delete(`/api/saves/${action.payload}`);
+        yield put({type:'FETCH_SAVES'});
     }
     catch {
         console.log('error with deleting saved post');
