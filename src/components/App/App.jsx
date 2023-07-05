@@ -60,7 +60,7 @@ function App() {
             exact
             path="/user"
           >
-            <UserPage />
+            <UserPage view="userHome"/>
           </ProtectedRoute>
         <ProtectedRoute
 

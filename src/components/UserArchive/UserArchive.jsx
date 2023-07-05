@@ -18,7 +18,7 @@ function UserArchive() {
         <>
             <div>
                 {saves?.map((item, i) => (
-                    <FeedItem key={i}item={item}/>
+                    <FeedItem key={i}item={item} view="archive"/>
                 ))}
             </div>
         </>

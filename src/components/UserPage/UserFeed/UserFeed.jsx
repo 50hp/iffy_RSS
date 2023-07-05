@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import FeedItem from './FeedItem/FeedItem';
 import "../../../terminal.css"
 
-function UserFeed() {
+function UserFeed({view}) {
     
     const feed = useSelector(store => store.feed);
     const dispatch = useDispatch();
@@ -16,7 +16,7 @@ function UserFeed() {
     return(
             <div className="terminal-timeline">
                 {feed?.map((item, i) => (
-                    <FeedItem key={i}item={item}/>
+                    <FeedItem key={i}item={item} view={view}/>
                 ))}
                 <button className="btn btn-primary btn-block" >Load More</button>          
             </div>

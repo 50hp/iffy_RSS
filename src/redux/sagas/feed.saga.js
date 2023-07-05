@@ -43,11 +43,40 @@ function* fetchSaves() {
         console.log('Error with fetching feed:');
     }
 }
+
+function* setSaveRead(action) {
+    
+    try {
+        yield axios.put(`/api/saves/${action.payload.post_id}`, {state:action.payload.state});
+    }
+    catch {
+        console.log('Error with archive mark read post');
+    }
+}
+
+function* unSave(action) {
+
+    try {
+        yield axios.put(`/api/saves/${action.paylad}`);
+    }
+    catch {
+        console.log('error with deleting saved post');
+    }
+
+
+
+}
+
+
+
+
 function* feedSaga() {
     yield takeLatest("FETCH_FEED", fetchFeed);
     yield takeLatest("SET_READ", setRead);
+    yield takeLatest("SET_SREAD", setSaveRead);
     yield takeLatest("SET_SAVE", setSave);
     yield takeLatest("FETCH_SAVES", fetchSaves);
+    yield takeLatest("UNSAVE", unSave);
 }
 
 export default feedSaga;
