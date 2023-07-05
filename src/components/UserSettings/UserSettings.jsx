@@ -6,7 +6,6 @@ function UserSettings() {
    return(
         
         <div>
-
             <UserSourceList />
         </div>
     );
