@@ -44,7 +44,8 @@ function UserSourceForm() {
                                onChange={(e)=>setInputTwo(e.target.value)}
                                required
                                placeholder="url"
-                               type="text"
+                               type="url"
+                               pattern="https://.*"
                         />   
                     </div>
                     <button className="btn btn-default" type="submit">ADD</button>

@@ -37,8 +37,7 @@ function UserSourceList(){
                 <UserSources key={i} item={item} editToggle={editToggle} />
             ))}
             
-            <button>Add Source</button> 
-            <button onClick={()=> handleClick('edit')}>Edit Sources</button> 
+            <button className="btn btn-primary btn-ghost" onClick={()=> handleClick('edit')}>Edit Sources</button> 
         </div>
     );
 
