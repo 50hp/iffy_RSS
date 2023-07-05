@@ -33,8 +33,8 @@ router.post('/', (req, res) => {
         const item = req.body;
         console.log(user_id, item);
         const queryStuff = `
-                    INSERT INTO saves (user_id, creator, title, link, pubDate, content, contentSnippet, guid, isoDate, author, isread)
-                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`;
+                    INSERT INTO saves (user_id, creator, title, link, pubDate, content, contentSnippet, guid, isoDate, author)
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`;
         const values =[user_id,
                     item.creator,
                     item.title, 
@@ -44,8 +44,7 @@ router.post('/', (req, res) => {
                     item.contentsnippet,
                     item.guid,
                     item.isodate,
-                    item.author,
-                    item.isread];
+                    item.author];
         pool.query(queryStuff, values)
         .then(results => {
             console.log(results.rows);

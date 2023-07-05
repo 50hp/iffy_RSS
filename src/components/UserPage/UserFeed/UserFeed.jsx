@@ -2,7 +2,7 @@ import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { useEffect } from 'react';
 import FeedItem from './FeedItem/FeedItem';
-import 'terminal.css'
+import "../../../terminal.css"
 
 function UserFeed() {
     
@@ -14,7 +14,7 @@ function UserFeed() {
         dispatch({type:"FETCH_FEED"});
     }, []);
     return(
-            <div class="terminal-timeline">
+            <div className="terminal-timeline">
                 {feed?.map((item, i) => (
                     <FeedItem key={i}item={item}/>
                 ))}

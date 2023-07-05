@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import FeedContent from "./FeedContent/FeedContent";
-import 'terminal.css'
-
+import "../../../../terminal.css";
+import "./FeedItem.css";
 
 function FeedItem({item}) {
     
@@ -18,10 +18,8 @@ function FeedItem({item}) {
         switch(button) {
         case 'read':
             setMarkRead(!markRead);
-            dispatch({type:"SET_READ", payload:{
-                                                state: !markRead,
-                                                id: item.post_id
-                                                }});
+            dispatch({type:"SET_READ", 
+                      payload:{state: !markRead, id: item.post_id }});
             return;
         case 'save':
             setMarkSave(!markSave);
@@ -45,21 +43,26 @@ function FeedItem({item}) {
     // console.log(user);
     return(
 
-            <div class="terminal-card">
-
-                <h4>{item.title}</h4>
-
-        {(!markRead) ? (   
-            <>
-                    <span>Date: {item.pubdate}</span>
-                    <p>Author: {item.creator || item.author}</p>
-                    {isContent ? (
-                        content ? (
-                            <button className="btn btn-default btn-ghost" onClick={() => handleClick('content')}> Read Less </button>
-                            ) : (
-                            <button className="btn btn-default btn-ghost" onClick={() => handleClick('content')}> Read More </button>
-                            )
-                        ) : (<></>)}
+            <div className="terminal-card">
+                <div className="headingContainer">
+                    <h4>{item.title}</h4>
+                    {markRead ? (
+                            <button className="btn btn-default btn-ghost" onClick={()=> handleClick('read')}> \|/ </button>
+                            ) : ( 
+                            <button className="btn btn-default btn-ghost" onClick={()=> handleClick('read')}>  /|\  </button>
+                            )}
+                </div>
+                {(!markRead) ? (   
+                    <>
+                        <span>Date: {item.pubdate}</span>
+                        <p>Author: {item.creator || item.author}</p>
+                        {isContent ? (
+                            content ? (
+                                <button className="btn btn-default btn-ghost" onClick={() => handleClick('content')}> Read Less </button>
+                                ) : (
+                                <button className="btn btn-default btn-ghost" onClick={() => handleClick('content')}> Read More </button>
+                                )
+                            ) : (<></>)}
 
 
                     <FeedContent content={item.content}
@@ -74,22 +77,14 @@ function FeedItem({item}) {
                                 <button className="btn btn-default btn-ghost" onClick={()=> handleClick('save')}> Save </button>
                                 )} 
                         </div>
-                    ) : ( <></> )}
+                                ) : ( <></> )}
 
-               </> ) : (
+                           </> ) : (
 
                         <></>
-                )
-                
-        } 
+                                )} 
 
-        {markRead ? (
-                <button className="btn btn-default btn-ghost" onClick={()=> handleClick('read')}> Expand </button>
-                ) : ( 
-                <button className="btn btn-default btn-ghost" onClick={()=> handleClick('read')}>  Collapse  </button>
-                )}
-
-            </div>
+                        </div>
     );
 
 
