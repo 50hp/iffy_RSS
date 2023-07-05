@@ -45,14 +45,14 @@ function UserHome({item}) {
      return(
     
              <div className="terminal-card">
-                 <div className="headingContainer">
+                 <header className="headingContainer">
                      <h4>{item.title}</h4>
                      {markRead ? (
-                             <button className="btn btn-default btn-ghost" onClick={()=> handleClick('read')}> \|/ </button>
+                             <button className="btn btn-third" onClick={()=> handleClick('read')}> \|/ </button>
                              ) : ( 
-                             <button className="btn btn-default btn-ghost" onClick={()=> handleClick('read')}>  /|\  </button>
+                             <button className="btn btn-third" onClick={()=> handleClick('read')}>  /|\  </button>
                              )}
-                 </div>
+                 </header>
                  {(!markRead) ? (   
                      <>
                          <span>Date: {item.pubdate}</span>

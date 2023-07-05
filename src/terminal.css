@@ -697,6 +697,22 @@ select:-webkit-autofill:focus {
   background-color: var(--error-color);
   border-color: var(--error-color);
 }
+/* custom button */
+.btn-third {
+    color: var(--invert-font-color);
+    background-color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    margin-left: 5px; 
+}
+
+.btn-third:hover,
+.btn-third:focus:not(.btn-ghost) {
+    border-color: var(--primary-color);
+    margin-left: 5px; 
+}
+/*custom button*/
+
+
 
 .btn-error.btn-ghost {
   border-color: var(--error-color);
