@@ -37,7 +37,7 @@ router.get('/', async (req, res) => {
                  const queryText = `SELECT * FROM feeds
                                     JOIN rss_sources ON feeds.rss_id = rss_sources.rss_id
                                     WHERE user_id = $1
-                                    ORDER BY post_id ASC
+                                    ORDER BY parsdate DESC
                                     LIMIT $2
                                     OFFSET $3;`;
                  const results = await client.query(queryText, [user_id, limit, offset]);
@@ -61,7 +61,7 @@ router.get('/', async (req, res) => {
                  const queryText = `SELECT * FROM feeds
                                     JOIN rss_sources ON feeds.rss_id = rss_sources.rss_id
                                     WHERE user_id = 1
-                                    ORDER BY post_id ASC
+                                    ORDER BY parsdate DESC
                                     LIMIT $1
                                     OFFSET $2;`;
                  const results = await client.query(queryText, [limit, offset]);

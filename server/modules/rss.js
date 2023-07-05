@@ -31,8 +31,8 @@ const parser = new Parser();
              for ( item of feed.items ) {
                  console.log(item.title);
                  let queryStuff = `
-                     INSERT INTO feeds (rss_id, creator, title, link, pubDate, content, contentSnippet, guid, isoDate, author)
-                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`;
+                     INSERT INTO feeds (rss_id, creator, title, link, pubDate, content, contentSnippet, guid, isoDate, author, parsDate)
+                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`;
                  let values =[row.rss_id,
                              item.creator,
                              item.title, 
@@ -42,7 +42,8 @@ const parser = new Parser();
                              item.contentSnippet,
                              item.guid,
                              item.isoDate,
-                             item.author];
+                             item.author,
+                             Date.parse(item.pubDate)];
                  pool.query(queryStuff, values)
                  .then(results =>{})
                  .catch(error =>{
