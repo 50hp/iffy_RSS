@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
-import "terminal.css";
+import "../../../terminal.css";
+import "./UserSource.css";
 
 function UserSources({item, editToggle}){
     
@@ -16,16 +16,26 @@ function UserSources({item, editToggle}){
             return;
         }
     }    
-
+    console.log(item.ismute);
     return(
 
         <div>
-            <h5>{item.source_name}</h5>
-            <span>{item.source_url}</span>
+            {item.ismute? (
+            <h1 className="mute">{item.source_name}</h1>
+            ):(
+            <h1>{item.source_name}</h1>
+            )} 
+            <a href={item.source_url} >{item.source_url}</a>
             {editToggle ? (
                 <div> 
                     <button className="btn btn-error btn-ghost" onClick={()=> handleClick('delete')}> Remove Source </button>
+                    
+
+                    {item.ismute ? (
+                    <button className="btn btn-default btn-ghost" onClick={()=> handleClick('mute')}> Unmute Source </button>
+                    ) : (
                     <button className="btn btn-default btn-ghost" onClick={()=> handleClick('mute')}> Mute Source </button>
+                    )} 
                 </div> 
                 ) : (
                     <></>
