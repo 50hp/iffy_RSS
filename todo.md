@@ -24,7 +24,7 @@
 - [x] settings view
     - [x] post route for new sources 
     - [x] delete route for deleting sources
-    - [ ] mute route to set a sources to not be parsed
+    - [x] mute route to set a sourece to not be parsed
 
 - [ ] Nav Bar component
     - [ ] moved to a side bar

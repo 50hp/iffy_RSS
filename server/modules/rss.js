@@ -23,7 +23,7 @@ const parser = new Parser();
      
      try {
          await client.query('BEGIN');
-         const dbRows = await client.query(`SELECT * FROM rss_sources WHERE user_id = $1`, [user_id]);
+         const dbRows = await client.query(`SELECT * FROM rss_sources WHERE user_id = $1 AND ismute = false`, [user_id]);
          console.log(dbRows.rows);
          for ( row of dbRows.rows ) {
              let feed = await parser.parseURL(row.source_url);

@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 import UserFeed from './UserFeed/UserFeed';
 
 import "../../terminal.css"
-function UserPage() {
+function UserPage({view}) {
     
     const user = useSelector((store) => store.user);
   
@@ -11,7 +11,7 @@ function UserPage() {
 
     return (
         <div className="container">
-            <UserFeed/> 
+            <UserFeed view={view}/> 
         </div>
     );
 }

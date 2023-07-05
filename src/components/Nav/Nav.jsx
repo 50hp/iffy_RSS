@@ -44,7 +44,7 @@ function Nav() {
   //  );
      return (
  
-         <div className="sidenav">
+         <div className="navbar">
            <div className="terminal-nav"> 
              <div className="terminal-logo">
                  <div className="terminal-prompt">
@@ -78,15 +78,25 @@ function Nav() {
                           </Link>
                       </li> 
                       <li>
+                       <Link to="/archive">
+                        Archive
+                      </Link>                        
+                      </li> 
+                      <li>
+                       <Link to="/settings">
+                        Settings
+                      </Link>                        
+                      </li>
+                         <li>
                        <Link to="/about">
                         About
                       </Link>                        
                       </li> 
+                     <li>  
+                        <LogOutButton className="btn btn-error btn-ghost"/>
+                     </li>
                  </>
               )}
-                 <li>  
-                    <LogOutButton className="btn btn-error btn-ghost"/>
-                 </li>
                  </ul>
             </nav>
          </div>

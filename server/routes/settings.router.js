@@ -45,4 +45,22 @@ router.post('/', (req, res) => {
 });
 
 
+router.put('/:id', (req, res) => {
+    console.log('put read');
+    if (req.isAuthenticated()) {
+        const idToUpdate = req.params.id;
+        const state = !req.body.ismute;
+        console.log(state, idToUpdate);
+        const queryText =`UPDATE rss_sources SET ismute = $1 WHERE rss_id = $2;`;
+        pool.query(queryText, [state, idToUpdate])
+        .then(results => {
+            res.sendStatus(200);
+        }).catch(error => {
+            console.log('error with query', queryText, error);
+            res.sendStatus(500);
+        });
+    } else {
+        res.sendStatus(403);
+    }
+});
 module.exports = router;

@@ -19,7 +19,7 @@ function LandingPage() {
 
       <div className="grid">
         <div className="grid-col grid-col_8">
-            <UserPage /> 
+            <UserPage view="default"/> 
         </div>
         <div className="grid-col grid-col_4">
           <RegisterForm />

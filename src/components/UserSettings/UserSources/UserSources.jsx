@@ -11,6 +11,9 @@ function UserSources({item, editToggle}){
         case 'delete':
             dispatch({type:"DELETE_SOURCE", payload: item.rss_id });
             return;
+        case 'mute':
+            dispatch({type:"MUTE_SOURCE", payload: item });
+            return;
         }
     }    
 
@@ -21,8 +24,8 @@ function UserSources({item, editToggle}){
             <span>{item.source_url}</span>
             {editToggle ? (
                 <div> 
-                    <button onClick={()=> handleClick('delete')}> Remove Source </button>
-                    <button> Mute Source </button>
+                    <button className="btn btn-error btn-ghost" onClick={()=> handleClick('delete')}> Remove Source </button>
+                    <button className="btn btn-default btn-ghost" onClick={()=> handleClick('mute')}> Mute Source </button>
                 </div> 
                 ) : (
                     <></>
