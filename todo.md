@@ -29,4 +29,6 @@
 - [ ] Nav Bar component
     - [ ] moved to a side bar
 
-- [ ] Syling 
+- [ ] Syling
+    - [ ] Formate the nav bar better
+    - [ ] Fix conditional rendering

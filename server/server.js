@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 require('dotenv').config();
-
+const serverStatus = require('./modules/serverStatus.js');
 const app = express();
 
 const sessionMiddleware = require('./modules/session-middleware');
@@ -33,6 +33,11 @@ app.use('/api/saves', savesRouter);
 
 // Serve static files
 app.use(express.static('build'));
+
+serverStatus();
+
+
+
 
 
 // App Set //

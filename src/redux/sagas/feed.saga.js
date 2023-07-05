@@ -4,7 +4,7 @@ import axios from 'axios';
 
 function* fetchFeed() {
     try{
-        const results = yield axios.get(`/api/rss/1`);
+        const results = yield axios.get(`/api/rss`);
         console.log(results.data);
         yield put({type:"SET_FEED", payload: results.data});
     }
@@ -12,6 +12,19 @@ function* fetchFeed() {
         console.log('Error with fetching feed:');
     }
 }
+
+function* loadMore(action) {
+    console.log(action);
+    try {
+        const results = yield axios.get(`/api/rss?offset=${action.payload + 10}`);
+        console.log(results.data);
+        yield put({type:"SET_FEED", payload: results.data});
+    }
+    catch {
+        console.log('Error with fetching more feed:');
+    }
+}
+
 
 function* setRead(action) {
     try {
@@ -77,6 +90,7 @@ function* feedSaga() {
     yield takeLatest("SET_SREAD", setSaveRead);
     yield takeLatest("SET_SAVE", setSave);
     yield takeLatest("FETCH_SAVES", fetchSaves);
+    yield takeLatest("LOAD_MORE", loadMore);
     yield takeLatest("UNSAVE", unSave);
 }
 

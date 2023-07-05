@@ -53,7 +53,7 @@ const parser = new Parser();
          const commitStatus = await client.query('COMMIT');
          console.log(`finished`, commitStatus); 
     } catch (error) {
-            await client.query('ROOLBACK');
+            await client.query('ROLLBACK');
          console.log('error with adslkjadslkj;dsaklj;', error);
      } finally {
          client.release();
