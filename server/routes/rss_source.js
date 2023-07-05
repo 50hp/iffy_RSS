@@ -57,7 +57,8 @@ router.get('/', async (req, res) => {
          
         } else {
             console.log('dont need to gen');
-             const client = await pool.connect();
+            const client = await pool.connect();
+            console.log(client);
              try {
                  console.log('dont need to gen try');
         
