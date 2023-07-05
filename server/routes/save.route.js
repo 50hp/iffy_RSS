@@ -26,9 +26,10 @@ router.get('/', (req, res) => {
 });
 
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     console.log('put save');
     if (req.isAuthenticated()) {
+        const client = await pool.connect();
         const user_id = req.user.id;
         const item = req.body;
         console.log(user_id, item);
@@ -45,14 +46,19 @@ router.post('/', (req, res) => {
                     item.guid,
                     item.isodate,
                     item.author];
-        pool.query(queryStuff, values)
-        .then(results => {
-            console.log(results.rows);
-            res.sendStatus(200);
-        }).catch(error => {
+        try { 
+        await client.query(queryStuff, values);
+        await client.query('UPDATE feeds SET issaved = true WHERE post_id = $1', [item.post_id]);
+        res.sendStatus(200);
+        }
+        catch {
+            console.log('error with updatating save')
             res.sendStatus(500);
-            console.log('error with queryText', queryText, error);
-        });
+        }
+        finally {
+            console.log('finished saving'); 
+            client.release();
+        }
 
     } else {
         res.sendStatus(403);
