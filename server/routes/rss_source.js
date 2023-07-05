@@ -14,14 +14,7 @@ router.get('/', async (req, res) => {
     if (req.isAuthenticated()) {
         const user_id = req.user.id;
         const feedState = await dayFeedChecker(user_id);
-        // try { 
-        //     console.log('get route first route');
-        //     feedState = await dayFeedChecker(user_id);
-        // } catch {
-        //     res.sendStatus(500);
-        //     console.log('error');
-        //     // return
-        // }
+       
         //conditional to check to see if the feed needs to be regend
         if (!feedState) {
             console.log('need to gen');
@@ -34,31 +27,10 @@ router.get('/', async (req, res) => {
              res.sendStatus(500);
              // return
          }
-         
-         // const client = await pool.connect();
-         // try {
-         //
-         //     const queryText = `SELECT * FROM feeds
-         //                        JOIN rss_sources ON feeds.rss_id = rss_sources.rss_id
-         //                        WHERE user_id = $1
-         //                        ORDER BY post_id ASC
-         //                        LIMIT $2
-         //                        OFFSET $3;`;
-         //     const results = await client.query(queryText, [user_id, limit, offset]);
-         //     res.send(results.rows); 
-         // } catch (error) {
-         //     console.log('error with query', error);
-         //     res.sendStatus(500);
-         //     // return;
-         // } finally {
-         //     client.release();
-         //     console.log('finished with get');
-         // }
-         
+        //sends the users feed to the client 
         } else {
             console.log('dont need to gen');
             const client = await pool.connect();
-            console.log(client);
              try {
                  console.log('dont need to gen try');
         
@@ -69,7 +41,6 @@ router.get('/', async (req, res) => {
                                     LIMIT $2
                                     OFFSET $3;`;
                  const results = await client.query(queryText, [user_id, limit, offset]);
-                 // console.log(results);
                  res.send(results.rows); 
              } catch (error) {
                  console.log('dont need to gen catch');
@@ -79,8 +50,9 @@ router.get('/', async (req, res) => {
                  client.release();
                  console.log('finished with get');
              }
-            // console.log('outside finally');
+             console.log('outside finally of dont need to gen');
         }
+        //sends the default user feed to landing page for people not logged in
     } else {
             
             const client = await pool.connect();
