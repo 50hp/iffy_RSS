@@ -74,3 +74,20 @@
 	left: 20px;
 	padding-top: 20px;
 }
+
+.test {
+    cursor: pointer;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    text-align: left;
+    background-color: transparent;
+    font-size: var(--global-font-size);
+    color: var(--error-color);
+    text-decoration: none;
+}
+
+.test:hover {
+    background-color: var(--error-color);
+    color: var(--invert-font-color);
+}
