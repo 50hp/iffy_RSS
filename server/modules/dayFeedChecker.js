@@ -1,7 +1,8 @@
 const pool = require("./pool");
 
 
-
+//checks the last time the feed was updated
+//if the time is greater than lower limit return false.
 async function dayFeedChecker(user_id) {
     console.log('dayFeedChecker', user_id);
     const date = Date(); 

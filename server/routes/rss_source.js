@@ -4,7 +4,7 @@ const router = express.Router();
 let sourceFeed = require('../modules/rss.js');
 let dayFeedChecker = require('../modules/dayFeedChecker.js');
 
-//set up so get sends 10 posts at a time
+//Get route 
 router.get('/', async (req, res) => {
     console.log(req.query.offset);
     console.log('getting feed');
