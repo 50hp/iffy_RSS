@@ -4,7 +4,7 @@ const sourceFetch = require('../modules/rss.js');
 const router = express.Router();
 
 
-
+//route to sendd user archived posts
 router.get('/', (req, res) => {
     console.log('getting saves');
 
@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
     }
 });
 
-
+//route to add user posts
 router.post('/', async (req, res) => {
     console.log('post save');
     if (req.isAuthenticated()) {
@@ -65,6 +65,7 @@ router.post('/', async (req, res) => {
     }
 });
 
+//updates archived posts read state
 router.put("/:id", (req, res) => {
     console.log('put save read');
     if (req.isAuthenticated()) {
@@ -86,6 +87,7 @@ router.put("/:id", (req, res) => {
 
 });
 
+//route to unsave a post
 router.delete("/:id", (req, res) => {
     console.log('in delete');
     if (req.isAuthenticated()) {

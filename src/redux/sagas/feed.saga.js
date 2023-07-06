@@ -12,7 +12,7 @@ function* fetchFeed() {
         console.log('Error with fetching feed:');
     }
 }
-
+//for limited loading of user feed
 function* loadMore(action) {
     console.log(action);
     try {

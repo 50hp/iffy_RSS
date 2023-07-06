@@ -3,8 +3,10 @@ const Parser = require('rss-parser');
 const parser = new Parser();
 
 
- async function sourceFetch(user_id) {
-     console.log('sourceFetch');    
+//maintains the users feed
+async function sourceFetch(user_id) {
+     console.log('sourceFetch');
+    //clears the db of old posts
      const client = await pool.connect()
      try {
          await client.query('BEGIN');
@@ -20,12 +22,13 @@ const parser = new Parser();
          await client.query('ROLLBACK')
          console.log('Error with delete of', error);
     }
-     
+    //Grabs the rss information and puts it into the db 
      try {
          await client.query('BEGIN');
          const dbRows = await client.query(`SELECT * FROM rss_sources WHERE user_id = $1 AND ismute = false`, [user_id]);
          console.log(dbRows.rows);
          for ( row of dbRows.rows ) {
+             //RSS Parser call
              let feed = await parser.parseURL(row.source_url);
              console.log(feed.title);
              for ( item of feed.items ) {
