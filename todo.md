@@ -12,7 +12,7 @@
     - [x] save toggle button
     - [x] put route for mark read
     - [x] mark read button toggle
-    - [ ] render 10 post at a time - stretch
+    - [x] render 10 post at a time - stretch
 - [x] default feed view
 
 - [x] archive view
