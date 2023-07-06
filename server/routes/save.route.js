@@ -93,14 +93,20 @@ router.delete("/:id", (req, res) => {
     if (req.isAuthenticated()) {
         const user_id = req.user.id;
         const idToDelete = req.params.id;
-        const queryWords = `DELETE FROM saves WHERE post_id = $1;`;
-        pool.query(queryWords, [idToDelete])
-        .then(results => {
-            res.sendStatus(200);
-        }).catch(error => {
-            console.log('error with query', queryWords, error);
-            res.sendStatus(500);
-        });
+        const body = req.body.user_id;
+        console.log(user_id, idToDelete, body);
+        if (user_id === body ) {
+            const queryWords = `DELETE FROM saves WHERE post_id = $1;`;
+            pool.query(queryWords, [idToDelete])
+            .then(results => {
+                res.sendStatus(200);
+            }).catch(error => {
+                console.log('error with query', queryWords, error);
+                res.sendStatus(500);
+            });
+        } else {
+            res.sendStatus(403);
+        }
 
     } else {
         res.sendStatus(403);

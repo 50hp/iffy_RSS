@@ -68,9 +68,9 @@ function* setSaveRead(action) {
 }
 
 function* unSave(action) {
-
+    console.log(action);
     try {
-        yield axios.delete(`/api/saves/${action.payload}`);
+        yield axios.delete(`/api/saves/${action.payload.post_id}`, {data: {user_id: action.payload.user_id}});
         yield put({type:'FETCH_SAVES'});
     }
     catch {

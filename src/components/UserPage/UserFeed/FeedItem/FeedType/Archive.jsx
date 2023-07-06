@@ -22,7 +22,7 @@ function Archive({item}) {
             return;
         case 'save':
             setMarkSave(!markSave);
-            dispatch({type:"UNSAVE", payload: item.post_id});
+            dispatch({type:"UNSAVE", payload: {post_id: item.post_id, user_id: item.user_id}});
             return;
         case 'content':
             setContent(!content);
