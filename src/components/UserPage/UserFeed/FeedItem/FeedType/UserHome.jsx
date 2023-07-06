@@ -54,7 +54,7 @@ function UserHome({item}) {
                              )}
                  </header>
                  {(!markRead) ? (   
-                     <>
+                     <div className="bodyBox">
                          <span>Date: {item.pubdate}</span>
                          <p>Author: {item.creator || item.author}</p>
                          {isContent ? (
@@ -80,7 +80,7 @@ function UserHome({item}) {
                          </div>
                                  ) : ( <></> )}
     
-                            </> ) : (
+                            </div> ) : (
     
                          <></>
                                  )} 
