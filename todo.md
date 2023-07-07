@@ -13,7 +13,9 @@
     - [x] put route for mark read
     - [x] mark read button toggle
     - [x] render 10 post at a time - stretch
-    
+    - [ ] refactor get route to use modules
+    - [ ] feed gen manualy triggered by user
+
 - [x] default feed view
 
 - [x] archive view
