@@ -8,7 +8,9 @@ router.get('/sources', (req, res) => {
     
     if (req.isAuthenticated()) {
         const idToGet = req.user.id; 
-        const queryText = `SELECT * FROM rss_sources WHERE user_id=$1`;
+        const queryText = `SELECT * FROM rss_sources 
+                           WHERE user_id=$1
+                           ORDER BY rss_id;`;
         pool.query(queryText, [idToGet])
         .then(results => {
             res.send(results.rows);
@@ -55,6 +57,7 @@ router.put('/:id', (req, res) => {
         pool.query(queryText, [state, idToUpdate])
         .then(results => {
             res.sendStatus(200);
+            sourceFetch(req.user.id);
         }).catch(error => {
             console.log('error with query', queryText, error);
             res.sendStatus(500);

@@ -22,6 +22,7 @@ function* postSettings(action) {
     console.log(action);
     try {
         yield axios.post('/api/settings', action.payload);
+        yield put({type:"FETCH_SETTINGS"});
         console.log('success');
     }
 
@@ -35,6 +36,7 @@ function* sourceDelete(action) {
     console.log(action);
     try {
         yield axios.delete(`/api/rss/${action.payload}`);
+        yield put({type:"FETCH_SETTINGS"});
         console.log('success');
     }
 
@@ -48,6 +50,7 @@ function* sourceMute(action) {
     console.log(action);
     try {
         yield axios.put(`/api/settings/${action.payload.rss_id}`, action.payload);
+        yield put({type:"FETCH_SETTINGS"});
         console.log('success');
     }
 
