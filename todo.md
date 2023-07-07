@@ -13,6 +13,7 @@
     - [x] put route for mark read
     - [x] mark read button toggle
     - [x] render 10 post at a time - stretch
+    
 - [x] default feed view
 
 - [x] archive view
@@ -25,6 +26,7 @@
     - [x] post route for new sources 
     - [x] delete route for deleting sources
     - [x] mute route to set a sourece to not be parsed
+    - [ ] set sagas to update local state on deletion or mute
 
 - [x] Nav Bar component
     - [x] moved to a side bar
@@ -32,3 +34,12 @@
 - [ ] Syling
     - [x] Formate the nav bar better
     - [x] Fix conditional rendering
+    - [ ] Center Main feed on page
+    - [ ] Set limits on feed so it doesn't jump around
+    - [x] Favico Icon
+    - [ ] update footer
+
+- [ ] About page
+    - [ ] Basic Site information
+    - [ ] List of rss feeds and links for ez of use
+    - [ ] links to me
