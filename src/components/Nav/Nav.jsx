@@ -22,11 +22,19 @@ function Nav() {
               {/* If no user is logged in, show these links */}
               {!user.id && (
                 // If there's no user, show login/registration links
-                 <li>
-                    <Link to="/login">
-                         Login / Register
-                    </Link>
-                  </li>
+                  <div>
+                     <li>
+                       <Link to="/about">
+                        About
+                      </Link>                        
+                      </li> 
+
+                      <li>
+                        <Link to="/login">
+                             Login / Register
+                        </Link>
+                      </li>
+                  </div>
               )}
        
               {/* If a user is logged in, show these links */}
@@ -55,6 +63,7 @@ function Nav() {
                      <li>
                     <a>_ </a> 
                     </li>
+
                      <li>  
                         <LogOutButton className="test"/>
                      </li>
