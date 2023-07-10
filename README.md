@@ -31,8 +31,6 @@ software engineer.
 * [Node](https://nodejs.org/en) - Runtime Enviorment
 * [RSS Parser](https://www.npmjs.com/package/rss-parser) - Used to generate RSS Feeds
 
-## Contributing
-
 
 ## Authors
 
