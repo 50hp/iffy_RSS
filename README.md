@@ -27,12 +27,17 @@ software engineer.
 
 ## Built With
 
-* [React](https://react.dev/) - The web framework used
+* [React](https://react.dev/) - JS Library
+* [Redux](https://redux.js.org/) - JS Library
+* [Express](https://expressjs.com/) - JS Framework
+* [Axios](https://axios-http.com/) - JS Library
 * [Node](https://nodejs.org/en) - Runtime Enviorment
 * [RSS Parser](https://www.npmjs.com/package/rss-parser) - Used to generate RSS Feeds
+* [PostgresSQL](https://www.postgresql.org/) - Datebase
+* [Terminal CSS](https://terminalcss.xyz/) - CSS Library 
 
 
-## Authors
+## Author
 
 * **Isaac Faulkner**
   [50hp](https://github.com/50hp)
